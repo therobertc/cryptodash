@@ -11,16 +11,16 @@ grid-gap: 15px;
 margin-top: 40px;
 `
 
-function getCoinsToDisplay(coinList, topSection){
+function getCoinsToDisplay(coinList, topSection, favorites){
     return (
-        Object.keys(coinList).slice(0, topSection ? 10 : 100)
+        topSection ? favorites : Object.keys(coinList).slice(0, 100)
     )}
 
 export default function ({topSection}){
     return (
     <AppContext.Consumer>
-        {({coinList}) => <CoinGridStyled>
-            {getCoinsToDisplay(coinList, topSection).map(coinKey => 
+        {({coinList, favorites}) => <CoinGridStyled>
+            {getCoinsToDisplay(coinList, topSection, favorites).map(coinKey => 
             <CoinTile topSection={topSection} coinKey={coinKey}/> 
             )}
         </CoinGridStyled>}
